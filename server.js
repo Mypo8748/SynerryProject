@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const { countDocuments } = require('./models/shortUrl')
 const shortUrl = require('./models/shortUrl')
 const ShortUrl = require('./models/shortUrl')
 const app = express()
@@ -27,6 +28,10 @@ app.get('/:shortUrl', async (req , res) => {
    shortUrl.save()
 
    res.redirect(shortUrl.full)
+})
+
+app.get('/qr-code', (req , res ) => {
+    res.render('qr-code')
 })
 
 app.listen(process.env.PORT || 5000);
