@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    
 
     <title>Project Synerry</title>
     <style>
@@ -88,7 +88,8 @@
         }
 
         .qr-code {
-
+            position: relative;
+            z-index: 999;
             border-top: 0.5rem solid #8f8073;
             border-right: 0.5rem solid #8f8073;
             border-bottom: 1rem solid #8f8073;
@@ -119,6 +120,7 @@
             text-decoration: none;
             color: #eae6e5;
         }
+        
 
        
     </style>
@@ -128,23 +130,25 @@
 
 
     
-    <section class="heading">
+    <div class="heading">
         <div class="title">QRCodes</div>
         <div class="sub-title">Generate QRCodes for anything!</div>
-    </section>
-    <section class="user-input">
-        <label for="input_text">Type something...</label>
-        <input type="text" name="input_text" id="input_text" autocomplete="off">
+    </div>
+    
+    
+       <form action="/shortUrls" method="POST" class="user-input">
+        <label for="fullUrl">Type something...</label>  
+        <input type="text" name="fullUrl" id="fullUrl" autocomplete="off">
         <button class="button" class="button" type="submit"> Generate QR CODE</button>
-    </section>
+    </form>
     <div class="qr-code" style="display: none;"></div>
     <center><div class="container">
         <h1>Short URL</h1> 
-         <form action="/shortUrls" method="POST" class="my-4 form-inline">
+         <!-- <form action="/shortUrls" method="POST" class="my-4 form-inline">
            <label for="fullUrl" class="sr-only">Url</label>
            <input required placeholder="Url"  type="url" name="fullUrl" id="fullUrl" class="form-control col-md-8">
            <button class="btn btn-success" type="submit">Clicks</button></center>
-         </form>
+         </form> -->
          <center><style>
             .tbl {  border-collapse: collapse; width:300px; }
             .tbl th, .tbl td { padding: 5px; border: solid 1px #777; }
@@ -177,7 +181,7 @@
         let qr_code_element = document.querySelector(".qr-code");
 
         btn.addEventListener("click", () => {
-            let user_input = document.querySelector("#input_text");
+            let user_input = document.querySelector("#fullUrl");
             if (user_input.value != "") {
                 if (qr_code_element.childElementCount == 0) {
                     generate(user_input);
